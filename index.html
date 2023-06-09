@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Deep Learning Models</title>
+</head>
+<body>
+    <h1>Deep Learning Models</h1>
+    <form id="model1Form" action="C:\Users\shashidhar\Downloads\combined_notebook.ipynb">
+        <label for="data">Enter data for Model 1:</label>
+        <input type="file" accept="video/*" capture="camcorder" id="videoInput">
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+    <form id="model2Form">
+        <label for="data">Enter data for Model 2:</label>
+        <input type="text" id="data2" name="data2">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Handle form submission for Model 1
+        $('#model1Form').submit(function(event) {
+            event.preventDefault();
+            var data = $('#data1').val();
+
+            $.ajax({
+                url: 'https://code.jquery.com/jquery-3.6.0.min.js',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({ 'data': data }),
+                success: function(response) {
+                    alert('Prediction from Model 1: ' + response.prediction);
+                }
+            });
+        });
+
+        // Handle form submission for Model 2
+        $('#model2Form').submit(function(event) {
+            event.preventDefault();
+            var data = $('#data2').val();
+
+            $.ajax({
+                url: '/predict_model2',
+                type: 'POST',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: JSON.stringify({ 'data': data }),
+                success: function(response) {
+                    alert('Prediction from Model 2: ' + response.prediction);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
